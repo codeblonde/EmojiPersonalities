@@ -1,0 +1,11 @@
+# vsc
+.vscode
+.DS_Store
+
+# venv
+personality-venv
+
+# data
+PersonalityData
+
+redundant.py
