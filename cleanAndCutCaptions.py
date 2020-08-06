@@ -62,10 +62,5 @@ def save_to_txt(inputDirectory, outputDirectory, fileExtension='.csv'): # defaul
 save_to_txt(inDirectory, outDirectory)
 
 
-#path = inDirectory+'cheaplazyvegan.csv'
-#new_clean, new_short = clean_texts(path)
-
-#with open(outDirectory+'short/cheaplazyvegan_new.txt', 'w+') as f:
-            #f.write(new_short)
 
 

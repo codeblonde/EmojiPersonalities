@@ -7,6 +7,7 @@ from scipy.stats import spearmanr
 import matplotlib.pyplot as plt
 import re
 import emojis
+from visualizations import create_heatmap
 #import pingouin as pg
 
 # Calculate correlation between top 100  emojis and personality types
@@ -74,20 +75,7 @@ def corr(persDataframe, emojiDataframe, topList):
 
 
 
-def create_heatmap(correlationDf, emojiNames, threshold=0.2):
-    # correlation heat map
-    # labels
-    labels = list(correlationDf.head())[:5] + emojiNames # personality trait labels + emoji names
-    print(labels)
-    # set values close to 0 to 0 to improve readability
-    correlationDf[correlationDf.isin(np.arange(-threshold, threshold))] = 0
-    # mask to show only bottom half of map
-    mask = np.zeros_like(rho, dtype = np.bool)
-    mask[np.triu_indices_from(mask)] = True
-    # plot
-    f, ax = plt.subplots(figsize = (10, 8))
-    sns.heatmap(correlationDf, ax = ax, cmap = 'YlGnBu', linewidths = 0.1, vmin = -1, vmax = 1, mask = mask, xticklabels = labels, yticklabels = labels).set_title('Emoji Frequency Correlation Heatmap')
-    plt.show()
+
 
 
 emoji_names = convert_emojis2names(top_emojis)

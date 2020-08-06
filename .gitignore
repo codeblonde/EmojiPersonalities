@@ -3,9 +3,11 @@
 .DS_Store
 
 # venv
-personality-venv
+personality-venv/
 
 # data
-PersonalityData
+PersonalityData/OriginalData/
+PersonalityData/EmojiDataframes/
+PersonalityData/key.json
 
 redundant.py

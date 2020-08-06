@@ -33,8 +33,7 @@ import numpy as np
 inDirectory = './PersonalityData/OriginalData/'
 outDirectory = './PersonalityData/EmojiDataframes/'
 columns = ['person_id', 'image_id', 'caption']
-#user = 'abcdefghijkleila_.csv'
-#testpath = directory+user
+
 
 # extract captions into list
 def get_captions_list(path, columns):
