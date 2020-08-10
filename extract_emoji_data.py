@@ -7,37 +7,28 @@ import advertools
 import re
 import numpy as np
 
-# TODO: add name column to output df
-# TODO: Graph of analysis (?)
 
+'''
+Given input in csv files:
+Instagram caption posts containing text + emojis, corresponding image ids
 
+Desired output per User:
+- length of caption 
+- word count 
+- overall number of emojis used -> overview
+- number of emojis per post -> overview
+- n unique emojis -> overview 
+- all emojis used  -> emojis flat; emojis flat text
+- unique emojis --> unique(emojis flat); unique(emojis flat text); 
 
-# Input:
-# Instagram caption Posts containing text + emojis
-
-# Output per User:
-# - length of caption 
-# - word count 
-# - overall number of emojis used -> overview
-# - number of emojis per post -> overview
-# - n unique emojis -> overview 
-# - all emojis used  -> emojis flat; emojis flat text
-# - unique emojis --> unique(emojis flat); unique(emojis flat text); 
-
-# Output whole Data:
-# - unique Emojis, 
-# - emoji frequencies
-
-
-# Read data
-inDirectory = './PersonalityData/OriginalData/'
-outDirectory = './PersonalityData/EmojiDataframes/'
-columns = ['person_id', 'image_id', 'caption']
-
+Desired output whole Data:
+- unique Emojis, 
+- emoji frequencies
+'''
 
 # extract captions into list
-def get_captions_list(path, columns):
-    data = pd.read_csv(path, sep = ";", header = None, names = columns, encoding = 'utf-8-sig')
+def get_captions_list(path, column_names):
+    data = pd.read_csv(path, sep = ";", header = None, names = column_names, encoding = 'utf-8-sig')
     captions = list(data['caption'])
     return captions
 
@@ -79,16 +70,16 @@ def create_summary_df(numerical_dict, emoji_dict): # add param for file extensio
     return summary_df
 
 # save to csv file
-def concatenate_and_save(inputDirectory, outputDirectory): # save param?
+def concatenate_and_save(input_directory, output_directory, column_names): # save param?
     df_all = pd.DataFrame()
     # iterate over files in directory
-    for path in glob.glob(inDirectory+'*'):
+    for path in glob.glob(input_directory+'*'):
         # get filename + remove file extension
         name = os.path.split(path)[1]
         name = os.path.splitext(name)[0]
         print('Currently processing: %s' %name)
         ## add name column ##
-        captions = get_captions_list(path, columns)
+        captions = get_captions_list(path, column_names)
         numerical_dict = get_numerical_summary(captions)
         emoji_dict = get_emoji_summary(captions)
         summary_df = create_summary_df(numerical_dict, emoji_dict)
@@ -97,8 +88,14 @@ def concatenate_and_save(inputDirectory, outputDirectory): # save param?
         #print(summary_df)
         df_all = df_all.append(summary_df, ignore_index = True)
         # save to csv file    
-    df_all.to_csv(outDirectory+'dfemojis.csv', encoding='utf-8-sig', sep=';', index = False)
-    #return df_all
+    df_all.to_csv(output_directory+'dfemojis.csv', encoding='utf-8-sig', sep=';', index = False)
+    return df_all
 
+if __name__ == '__main__':
+    # Read data
+    directory_in = './PersonalityData/OriginalData/'
+    directory_out = './PersonalityData/EmojiDataframes/'
 
-concatenate_and_save(inDirectory, outDirectory)
+    column_names = ['person_id', 'image_id', 'caption']
+
+    df_all = concatenate_and_save(directory_in, directory_out, column_names)

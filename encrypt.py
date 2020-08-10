@@ -19,7 +19,7 @@ with open('./PersonalityData/key.json', encoding='utf-8-sig') as jf:
 
 columns = ['person_id', 'image_id', 'caption']
 
-def encryptInstaData(inDirectory, key, outDirectory):
+def encrypt_instagram_data(inDirectory, key, outDirectory):
     for path in glob.glob(inDirectory+'*'):
         # get filename + remove file extension
         name = os.path.split(path)[1]
@@ -34,7 +34,7 @@ def encryptInstaData(inDirectory, key, outDirectory):
 
         data_encrypted.to_csv(outDirectory+anonym+'.csv', encoding='utf-8-sig', sep=';', index = False)
 
-def encryptLiwc(inDirectory, key, outDirectory):
+def encrypt_liwc_data(inDirectory, key, outDirectory):
     for path in glob.glob(inDirectory+'*'):
         # get filename + remove file extension
         name = os.path.split(path)[1]
