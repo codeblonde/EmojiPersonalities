@@ -8,6 +8,7 @@ personality-venv/
 # data
 PersonalityData/OriginalData/
 PersonalityData/EmojiDataframes/
+PersonalityData/Viz/
 PersonalityData/key.json
 
 redundant.py

@@ -33,6 +33,7 @@ def create_heatmap(correlation_df, emoji_names, threshold=0.2):
     # plot
     f, ax = plt.subplots(figsize = (10, 8))
     sns.heatmap(correlation_df, ax = ax, cmap = 'YlGnBu', linewidths = 0.1, vmin = -1, vmax = 1, mask = mask, xticklabels = labels, yticklabels = labels).set_title('Emoji Frequency Correlation Heatmap')
+    #plt.savefig('./PersonalityData/Anonymous/Outputs/correlationHeatmap.png')
     plt.show()
 
 if __name__ == '__main__':

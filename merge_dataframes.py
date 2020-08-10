@@ -37,7 +37,7 @@ if __name__ == '__main__':
     personality_df = pd.read_csv(directory+'dfpersonality.csv', encoding = 'utf-8-sig', sep =';')
 
     name_differences = check_names(emoji_df, personality_df)
-    if name_differences: 
+    if not name_differences: 
         df_complete = merge_dfs(emoji_df, personality_df, directory)
     
 

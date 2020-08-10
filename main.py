@@ -1,7 +1,7 @@
+#!/Users/Jana1/Desktop/Forschungsprojekt/PersonalityPy/personality-venv/bin/python
+
 '''
 #!/usr/bin/python3.6
-or
-#!/usr/bin/env python
 '''
 
 import sys
@@ -31,8 +31,8 @@ Steps:
 
 def main():
     print('Extracting Emoji Data ...')
-    #emoji_df = concatenate_and_save(emoji_dir, output_dir, column_names)
-    emoji_df = pd.read_csv('./PersonalityData/Anonymous/Outputs/dfemojis.csv', encoding = 'utf-8-sig', sep =';')
+    emoji_df = concatenate_and_save(emoji_dir, output_dir, column_names)
+    #emoji_df = pd.read_csv(emoji_path, encoding = 'utf-8-sig', sep =';')
     print(emoji_df)
 
     print('Sorting Emojis ...')
@@ -42,6 +42,7 @@ def main():
 
     print('Extracting Big Five Data ...')
     personality_df = create_personality_df(personality_dir, output_dir)
+    #personality_df = pd.read_csv(personality_path, encoding = 'utf-8-sig', sep =';')
     print(personality_df)
 
     print('Merging Dataframes ...')
@@ -79,6 +80,7 @@ if __name__ == '__main__':
     personality_dir = './PersonalityData/Anonymous/liwc_data/'
     output_dir = 'PersonalityData/Anonymous/Outputs/'
 
-    column_names = ['person_id', 'image_id', 'caption'] #(?)
+    column_names = ['person_id', 'image_id', 'caption'] 
 
     main()
+    #sys.exit('Done.')
