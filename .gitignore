@@ -1,3 +1,6 @@
+#pycache
+__pycache__/
+
 # vsc
 .vscode
 .DS_Store
@@ -8,10 +11,9 @@ personality-venv/
 # data
 PersonalityData/OriginalData/
 PersonalityData/EmojiDataframes/
-PersonalityData/Viz/heatmap_corr_absoccurence.png
+PersonalityData/Viz/heatmap_corr_absolute.png
 PersonalityData/key.json
 
+captions_summary.py
 redundant.py
-merge_dataframes.py
-
-__pycache__/
+personality_classification.py

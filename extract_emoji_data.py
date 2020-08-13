@@ -1,4 +1,3 @@
-## Summary and Soft Statistics of Scraped Personality Data ##
 import os
 import glob
 import pandas as pd
