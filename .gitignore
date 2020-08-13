@@ -8,8 +8,10 @@ personality-venv/
 # data
 PersonalityData/OriginalData/
 PersonalityData/EmojiDataframes/
-PersonalityData/Viz/
+PersonalityData/Viz/heatmap_corr_absoccurence.png
 PersonalityData/key.json
 
 redundant.py
-mergeDataframes.py
+merge_dataframes.py
+
+__pycache__/
