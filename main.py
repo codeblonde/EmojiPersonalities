@@ -1,4 +1,4 @@
-#!/Users/Jana1/Desktop/Forschungsprojekt/PersonalityPy/personality-venv/bin/python
+#!/Users/Jana1/Desktop/Forschungsprojekt/PersonalityPy/personality-venv2/bin/python
 
 '''
 #!/usr/bin/python3.6
@@ -7,13 +7,13 @@
 import sys
 import pandas as pd
 import json
-from merge_dataframes import merge_dfs, check_names
-from extract_emoji_data import concatenate_and_save
-from extract_personality_data import create_personality_df
-from get_top_emojis import get_top_emojis
-from demoji import convert_emojis2names
-from correlation import personality_emoji_correlations, emoji_correlations
-from visualizations import create_boxplot, create_heatmap
+from correlation_helper.merge_dataframes import merge_dfs, check_names
+from correlation_helper.extract_emoji_data import concatenate_and_save
+from correlation_helper.extract_personality_data import create_personality_df
+from correlation_helper.get_top_emojis import get_top_emojis
+from correlation_helper.demoji import convert_emojis2names
+from correlation_helper.correlation import personality_emoji_correlations, emoji_correlations
+from correlation_helper.visualizations import create_boxplot, create_heatmap
 
 '''
 Steps:
@@ -27,7 +27,7 @@ Steps:
 '''
 
 
-# TODO: what about save params?
+# TODO: what about save params? arg.parse
 
 def main():
     print('Extracting Emoji Data ...')

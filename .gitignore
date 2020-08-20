@@ -7,6 +7,7 @@ __pycache__/
 
 # venv
 personality-venv/
+personality-venv2/
 
 # data
 PersonalityData/OriginalData/
@@ -14,6 +15,8 @@ PersonalityData/EmojiDataframes/
 PersonalityData/Viz/heatmap_corr_absolute.png
 PersonalityData/key.json
 
-captions_summary.py
+# py scripts
+correlation_helper/captions_summary.py
 redundant.py
 personality_classification.py
+classifier_helper/extract_caption_embeddings.py
