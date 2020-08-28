@@ -6,7 +6,6 @@ import glob
 import os
 import tensorflow as tf
 from tensorflow import keras
-#import keras
 import sklearn
 from tensorflow.keras.applications.xception import Xception, preprocess_input
 #from tensorflow.keras.preprocessing.image import load_image, img_to_array
