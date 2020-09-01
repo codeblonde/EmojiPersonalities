@@ -16,10 +16,10 @@ from flair.embeddings import TransformerWordEmbeddings
 # use csv file to extract all images and captions (+ labels)
 
 
-def to_categorical(score):
+def to_binary(score):
     if score >= 50:
         score = 1
-    elif score < 50:
+    else:
         score = 0
     return score
 
@@ -30,53 +30,61 @@ def transform_labels(liwc_dir, username):
     big_five = list(scores.items())[:5]
     print(big_five)
     # openness, conscientiousness, extraversion, agreeableness, neuroticism
-    categrorical_scores = list(map(lambda x: to_categorical(x[1]), big_five))
-    return categrorical_scores
+    categorical_scores = list(map(lambda x: to_binary(x[1]), big_five))
+    return categorical_scores
 
 
-def create_dataset(path, word_model, emoji_model, img_model, required_size, liwc_dir):
-
-    columns = ['person_id', 'image_id', 'caption']
-    data = pd.read_csv(path, sep = ";", header = None, names = columns, encoding = 'utf-8-sig')
-
-    username = data['person_id'][0]
-    image_ids = data['image_id']
-    captions = data['caption']
-
-    print('Currently processing: %s' %username)
-
-    img_path = os.path.split(path)[0]
+def create_dataset(directory, word_model, emoji_model, img_model, required_size, liwc_dir):
 
     text_embeddings_array = []
     emoji_embeddings_array = []
     img_embeddings_array = []
+    label_array = []
 
-    print('Processing captions ...')
-    for cap in captions:
-        clean_cap = clean_caption(cap)
-        cap_embedding = get_text_embedding(clean_cap, word_model)
-        text_embeddings_array.extend(cap_embedding)
+    for path in glob.glob(directory):
+        # load csv
+        columns = ['person_id', 'image_id', 'caption']
+        data = pd.read_csv(path, sep = ";", header = None, names = columns, encoding = 'utf-8-sig')
 
-        emojis = get_emojis(cap)
-        emoji_embeddings = get_emoji_embeddings(emojis, emoji_model)
-        emoji_embeddings_array.extend(emoji_embeddings) # extend; expand dim before using extend?
+        username = data['person_id'][0]
+        image_ids = data['image_id']
+        captions = data['caption']
 
-    # print(np.array(text_embeddings_array).shape)
-    # print(np.array(emoji_embeddings_array).shape)
+        print('Currently processing: %s' %username)
 
+        img_path = os.path.split(path)[0]
+
+        # preprocess captions + emojis
+        print('Preparing captions ...')
+        for cap in captions:
+            clean_cap = clean_caption(cap)
+            cap_embedding = get_text_embedding(clean_cap, word_model)
+            text_embeddings_array.extend(cap_embedding)
+
+            emojis = get_emojis(cap)
+            emoji_embeddings = get_emoji_embeddings(emojis, emoji_model)
+            emoji_embeddings_array.extend(emoji_embeddings) # extend; expand dim before using extend?
+
+        # preprocess images
+        print('Preparing images ...')
+        for img in image_ids:
+            processed_image = process_img(img_path+'/'+img, required_size)
+            img_embedding = get_embedding(img_model, processed_image)
+            img_embeddings_array.extend(img_embedding)
+
+        # transform labels into binary / categorical values (multi-class output vector)
+        print('Transforming labels ...')
+        labels = transform_labels(liwc_dir, username) 
+        label_vec = [labels] * len(image_ids)
+        label_array.extend(label_vec)
+        #print(np.array(label_array).shape)
+
+    # pad sequences
     padded_text_embeddings = pad_embeddings(text_embeddings_array, max_length = 350)
     padded_emoji_embeddings = pad_embeddings(emoji_embeddings_array, max_length = 30)
-    print(padded_emoji_embeddings.shape)
-    print(padded_text_embeddings.shape)
 
-    print('Processing images ...')
-    for img in image_ids:
-        processed_image = process_img(img_path+'/'+img, required_size)
-        img_embedding = get_embedding(img_model, processed_image)
-        img_embeddings_array.extend(img_embedding)
-
-    labels = transform_labels(liwc_dir, username)
-    label_array = [[label] * len(image_ids) for label in labels]
+    #print(padded_emoji_embeddings.shape)
+    #print(padded_text_embeddings.shape)
 
     return padded_text_embeddings, padded_emoji_embeddings, img_embeddings_array, label_array
     
@@ -98,14 +106,13 @@ if __name__ == '__main__':
     #X_text, X_emoji, X_img, Y = list(), list(), list(), list()
 
     #for csv_file in glob.glob(directory):
-    padded_text_embeddings, padded_emoji_embeddings, img_embeddings_array, label_array = create_dataset(test_dir, transformer_model, emoji_model, img_model, required_size, liwc_dir)
+    padded_text_embeddings, padded_emoji_embeddings, img_embeddings_array, label_array = create_dataset(directory, 
+                                                                                        transformer_model, emoji_model, img_model, 
+                                                                                        required_size, liwc_dir)
 
-
-    # X_text.extend(data[0])
-    # print(np.array(X_text).shape)
-    # X_emoji.extend(data[1])
-    # print(np.array(X_emoji).shape)
-    # X_img.extend(data[2])
-    # print(np.array(X_img).shape)
-    # Y.extend(data[3])
-    # print(np.array(Y).shape)
+    print(padded_text_embeddings.shape)
+    print(padded_emoji_embeddings.shape)
+    print(np.array(img_embeddings_array).shape)
+    print(np.array(label_array).shape)
+    
+    np.savez_compressed('./PersonalityData/instagram_dataset.npz', padded_text_embeddings, padded_emoji_embeddings, img_embeddings_array, label_array)

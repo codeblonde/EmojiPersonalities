@@ -13,11 +13,11 @@ personality-venv2/
 PersonalityData/OriginalData/
 PersonalityData/EmojiDataframes/
 PersonalityData/Viz/heatmap_corr_absolute.png
+PersonalityData/instagram_dataset.npz
 PersonalityData/key.json
 emoji2vec.bin
 
 # py scripts
 correlation_helper/captions_summary.py
 redundant.py
-personality_classification.py
-classifier_helper/extract_caption_embeddings.py
+classifier_helper/test.py
