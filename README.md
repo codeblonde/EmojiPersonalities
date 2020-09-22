@@ -15,40 +15,40 @@ It includes the script used to scrape the social media data, as well as all the 
 ## Requirements
 Requirements can be taken from the requirements.txt file and mainly include:
 
-'''bash
-advertools==0.10.6
-emoji==0.5.4
-emojis==0.5.1
-scikit-learn==0.23.1
-scipy==1.4.1
-sklearn==0.0
-flair==0.6
-tensorflow==2.3.0
-Keras==2.4.3
-'''
+
+* advertools==0.10.6
+* emoji==0.5.4
+* emojis==0.5.1
+* scikit-learn==0.23.1
+* scipy==1.4.1
+* sklearn==0.0
+* flair==0.6
+* tensorflow==2.3.0
+* Keras==2.4.3
+
 
 ## Setting up a virtual environment
 All code was executed within a controlled virtual envirnment, using python's native venv.
 
 1. To set up your environment on a Linux machine use the following command or use other configurations:
-'''bash
-$python3 -m venv /path/to/venv/personality-venv
-'''
+```bash
+$ python3 -m venv /path/to/venv/personality-venv
+```
 
 2. activate the venv:
-'''bash
-$source personality-venv/bin/activate
-'''
+```bash
+$ source personality-venv/bin/activate
+```
 
 3. install requirements:
-'''bash
-pip3 install requirements.txt
-'''
+```bash
+$ pip3 install requirements.txt
+```
 
 4. to exit the venv use:
-'''bash
-$deactivate
-'''
+```bash
+$ deactivate
+```
 
 Most scripts can be executed in the environment as well as from the shell (on Linux), once the the venv has been created.
 
@@ -73,11 +73,11 @@ Next, the newly created dataset can be loaded and used for training in classific
 
 ## Run from terminal (Linux)
 Make sure to make the file executable using:
-'''bash
-sudo chmod +x file.py
-'''
+```bash
+$ sudo chmod +x file.py
+```
 
 then execute file by running:
-'''bash
-./file.py
-'''
+```bash
+$ ./file.py
+```
