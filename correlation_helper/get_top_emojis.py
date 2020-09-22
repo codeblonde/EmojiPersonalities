@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import numpy as np
 import pandas as pd
 import json
@@ -37,7 +39,7 @@ def get_top_emojis(pd_series, output_path, top_n = 100):
 
 if __name__ == '__main__':
 
-    directory = './PersonalityData/Anonymous/Outputs/'
+    directory = './AnonymizedData/Outputs/'
     data = pd.read_csv(directory+'dfemojis.csv', encoding = 'utf-8-sig', sep =';')
     
     emoji_percentage = data['emoji_percentage']

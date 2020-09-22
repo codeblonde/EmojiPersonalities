@@ -1,8 +1,5 @@
-#!/Users/Jana1/Desktop/Forschungsprojekt/PersonalityPy/personality-venv2/bin/python
+#!/your/absolute/path/personality-venv/bin/python
 
-'''
-#!/usr/bin/python3.6
-'''
 
 import sys
 import pandas as pd

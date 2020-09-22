@@ -1,3 +1,6 @@
+#!/your/absolute/path/personality-venv/bin/python
+
+
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -38,7 +41,7 @@ def create_heatmap(correlation_df, emoji_names, threshold=0.2):
 
 if __name__ == '__main__':
 
-    directory = './PersonalityData/EmojiDataframes/'
+    directory = './AnonymizedData/Outputs/'
 
     data = pd.read_csv(directory+'dfcomplete.csv', encoding = 'utf-8-sig', sep =';')
     bigFive_data = data[['agreeableness', 'conscientiousness', 'extraversion', 'neuroticism', 'openness']]

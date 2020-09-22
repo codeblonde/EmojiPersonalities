@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import emoji
 import re
 import pandas as pd
@@ -41,30 +43,22 @@ def get_emojis(caption):
     return emoji_list
 
 def clean_caption(caption):
-    #print(caption)
     # clean_caption = [word for word in caption.split() if word.isalpha()] # words only
-    # print(len(clean_caption))
     # clean_caption = ' '.join(clean_caption)
-    # print(caption)
     clean_caption = re.sub(emoji.get_emoji_regexp(), r'', caption) # remove all emojis
     clean_caption = re.sub('⠀', '', clean_caption) # remove unknown spaces symbol; keep punctuation (?)
     clean_caption = re.sub('[0-9]', '', clean_caption) # remove numbers
     clean_caption = re.sub('[@#$%^&*+-:]', '', clean_caption)
-    # print(clean_caption)
     return clean_caption
 
 def get_text_embedding(clean_caption, embedding_model):
     embeddings_array = []
     sentence = Sentence(clean_caption) # may also take more than one sentence
     embedding_model.embed(sentence) # outputs tensor object
-    #print(sentence, type(sentence))
     embeddings_array.append([t.embedding.numpy() for t in sentence]) # embeddings_array = np.array([....])
-    #embeddings_array = np.expand_dims(embeddings_array, axis=0) # new
-    #print(embeddings_array)
     return embeddings_array
 
 def get_emoji_embeddings(emoji_list, model):
-    #embeddings = np.array([model[emoji[0]] for emoji in emoji_list])
     embeddings = []
     for emoji in emoji_list:
         try:
@@ -72,9 +66,7 @@ def get_emoji_embeddings(emoji_list, model):
             embeddings.append(emb)
         except:
             pass
-    #embeddings = np.array(embeddings)
     embeddings_array = np.expand_dims(embeddings, axis=0) 
-    #print(embeddings_array.shape)
     return embeddings_array
 
 def pad_embeddings(embeddings_array, max_length):
@@ -82,10 +74,9 @@ def pad_embeddings(embeddings_array, max_length):
     return padded_array
 
 
-
 if __name__ == '__main__':
 
-    test_dir = '../Insta_pics/instagram-scrapper/abcdefghijkleila_/abcdefghijkleila_.csv'
+    test_dir = '.AnonymizedData/raw_data/user_0.csv'
     columns = ['person_id', 'image_id', 'caption']
     data = pd.read_csv(test_dir, sep = ";", header = None, names = columns, encoding = 'utf-8-sig')
 

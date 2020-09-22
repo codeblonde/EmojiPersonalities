@@ -1,4 +1,6 @@
 
+#!/your/absolute/path/personality-venv/bin/python
+
 import pandas as pd
 import numpy as np
 import json
@@ -31,7 +33,7 @@ def merge_dfs(df1, df2, output_directory):
 
 if __name__ == '__main__':
 
-    directory = './PersonalityData/EmojiDataframes/'
+    directory = './AnonymizedData/Eutputs/'
     
     emoji_df = pd.read_csv(directory+'dfemojis.csv', encoding = 'utf-8-sig', sep =';')
     personality_df = pd.read_csv(directory+'dfpersonality.csv', encoding = 'utf-8-sig', sep =';')

@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import os
 import glob
 import pandas as pd
@@ -10,8 +12,7 @@ import re
 # Max Text Length: 10.000 words
 
 # Read data
-directory_in = './PersonalityData/OriginalData/'
-directory_out = './PersonalityData/TextOnly/'
+
 sub_dir_clean = 'clean'
 sub_dir_short = 'short'
 columns = ['person_id', 'image_id', 'caption']
@@ -67,6 +68,9 @@ def main(input_directory, output_directory):
 
 
 if __name__ == '__main__':
+    directory_in = './AnonymizedData/raw_data/'
+    directory_out = './AnonymizedData/Outputs/'
+
     main(directory_in, directory_out)
 
 

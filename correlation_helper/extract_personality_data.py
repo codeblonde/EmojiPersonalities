@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import json
 import pandas as pd
 import glob
@@ -32,8 +34,8 @@ def create_personality_df(input_directory, output_directory): # save param?
 
 if __name__ == '__main__':
 
-    directory_in = './PersonalityData/LIWCJson/'
-    directory_out= './PersonalityData/EmojiDataframes/'
+    directory_in = './AnonymizedData/liwc_data/'
+    directory_out= './AnonymizedData/Outputs/'
 
     df_personality = create_personality_df(directory_in, directory_out)
     print(df_personality)

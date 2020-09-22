@@ -14,8 +14,14 @@ PersonalityData/OriginalData/
 PersonalityData/EmojiDataframes/
 PersonalityData/Viz/heatmap_corr_absolute.png
 PersonalityData/instagram_dataset.npz
+PersonalityData/new_labels5545.npz
 PersonalityData/key.json
 emoji2vec.bin
+PersonalityData/new_labels6040.npz
+PersonalityData/new_labels6535.npz
+
+# training tracking
+training_results/
 
 # py scripts
 correlation_helper/captions_summary.py

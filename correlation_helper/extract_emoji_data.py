@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import os
 import glob
 import pandas as pd
@@ -92,8 +94,8 @@ def concatenate_and_save(input_directory, output_directory, column_names): # sav
 
 if __name__ == '__main__':
     # Read data
-    directory_in = './PersonalityData/OriginalData/'
-    directory_out = './PersonalityData/EmojiDataframes/'
+    directory_in = './AnonymizedData/raw_data/'
+    directory_out = './AnonymizedData/Outputs/'
 
     column_names = ['person_id', 'image_id', 'caption']
 

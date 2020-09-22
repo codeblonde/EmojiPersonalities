@@ -1,3 +1,5 @@
+#!/your/absolute/path/personality-venv/bin/python
+
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -76,7 +78,7 @@ def emoji_correlations(correlation_df, traits):
 
 if __name__ == '__main__':
 
-    directory = './PersonalityData/EmojiDataframes/'
+    directory = './AnonymizedData/Outputs/'
     correlation_df = pd.read_csv(directory+'dfcomplete.csv', encoding = 'utf-8-sig', sep =';')
 
     # column names: name;num_emoji;emoji_per_post;unique_emoji;mean_caption_length;total_caption_length;
@@ -110,7 +112,7 @@ if __name__ == '__main__':
     #correlation_df = pd.read_csv(directory+'SignificantSpearmanEmojiPercentageCorr.csv', encoding = 'utf-8-sig', sep =';', index_col=0)
     traits = rho_sig.columns[:5].tolist()
     intercorrs = emoji_correlations(rho_sig, traits)
-    with open('./PersonalityData/EmojiDataframes/EmojiIntercorrelations.json', 'w', encoding='utf-8-sig') as jf:
+    with open('./AnonymizedData/Outputs/EmojiIntercorrelations.json', 'w', encoding='utf-8-sig') as jf:
         json.dump(intercorrs, jf, indent = 4, ensure_ascii=False)
 
 
